@@ -19,6 +19,10 @@ import {
     // Grbl
     GRBL,
     GRBL_ACTIVE_STATE_IDLE,
+    // GrblHal
+    GRBLHAL,
+    GRBLHAL_ACTIVE_STATE_IDLE,
+    GRBLHAL_ACTIVE_STATE_TOOL,
     // Marlin
     MARLIN,
     // Smoothie
@@ -30,7 +34,8 @@ import {
     TINYG_MACHINE_STATE_STOP,
     TINYG_MACHINE_STATE_END,
     // Workflow
-    WORKFLOW_STATE_IDLE
+    WORKFLOW_STATE_IDLE,
+    GRBLHAL_ACTIVE_STATE_TOOL
 } from '../../constants';
 import {
     MODAL_NONE,
@@ -239,8 +244,8 @@ class ProbeWidget extends PureComponent {
         'controller:state': (type, state) => {
             let units = this.state.units;
 
-            // Grbl
-            if (type === GRBL) {
+            // Grbl or GrlbHal
+            if (type === GRBL || type === GRBLHAL) {
                 const { parserstate } = { ...state };
                 const { modal = {} } = { ...parserstate };
                 units = {
@@ -391,7 +396,7 @@ class ProbeWidget extends PureComponent {
         const controllerState = this.state.controller.state;
         const defaultWCS = 'G54';
 
-        if (controllerType === GRBL) {
+        if (controllerType === GRBL || controllerType === GRBLHAL) {
             return get(controllerState, 'parserstate.modal.wcs') || defaultWCS;
         }
 
@@ -421,13 +426,23 @@ class ProbeWidget extends PureComponent {
         if (workflow.state !== WORKFLOW_STATE_IDLE) {
             return false;
         }
-        if (!includes([GRBL, MARLIN, SMOOTHIE, TINYG], controllerType)) {
+        if (!includes([GRBL, GRBLHAL, MARLIN, SMOOTHIE, TINYG], controllerType)) {
             return false;
         }
         if (controllerType === GRBL) {
             const activeState = get(controllerState, 'status.activeState');
             const states = [
                 GRBL_ACTIVE_STATE_IDLE
+            ];
+            if (!includes(states, activeState)) {
+                return false;
+            }
+        }
+        if (controllerType === GRBLHAL) {
+            const activeState = get(controllerState, 'status.activeState');
+            const states = [
+                GRBLHAL_ACTIVE_STATE_IDLE,
+                GRBLHAL_ACTIVE_STATE_TOOL
             ];
             if (!includes(states, activeState)) {
                 return false;

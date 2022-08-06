@@ -12,6 +12,7 @@ import controller from 'app/lib/controller';
 import i18n from 'app/lib/i18n';
 import {
     GRBL,
+    GRBLHAL,
     MARLIN,
     SMOOTHIE,
     TINYG
@@ -110,6 +111,7 @@ class Connection extends PureComponent {
         const enableHardwareFlowControl = get(connection, 'serial.rtscts', false);
         const canSelectControllers = (controller.loadedControllers.length > 1);
         const hasGrblController = includes(controller.loadedControllers, GRBL);
+        const hasGrblHalController = includes(controller.loadedControllers, GRBLHAL);
         const hasMarlinController = includes(controller.loadedControllers, MARLIN);
         const hasSmoothieController = includes(controller.loadedControllers, SMOOTHIE);
         const hasTinyGController = includes(controller.loadedControllers, TINYG);
@@ -153,6 +155,22 @@ class Connection extends PureComponent {
                                         }}
                                     >
                                         {GRBL}
+                                    </button>
+                                )}
+                                {hasGrblHalController && (
+                                    <button
+                                        type="button"
+                                        className={cx(
+                                            'btn',
+                                            'btn-default',
+                                            { 'btn-select': controllerType === GRBLHAL }
+                                        )}
+                                        disabled={!canChangeController}
+                                        onClick={() => {
+                                            actions.changeController(GRBLHAL);
+                                        }}
+                                    >
+                                        {GRBLHAL}
                                     </button>
                                 )}
                                 {hasMarlinController && (

@@ -122,7 +122,7 @@ class GrblWidget extends PureComponent {
         'serialport:open': (options) => {
             const { port, controllerType } = options;
             this.setState({
-                isReady: controllerType === GRBL,
+                isReady: controllerType === GRBL || controllerType === GRBLHAL,
                 port: port
             });
         },
@@ -131,7 +131,7 @@ class GrblWidget extends PureComponent {
             this.setState({ ...initialState });
         },
         'controller:settings': (type, controllerSettings) => {
-            if (type === GRBL) {
+            if (type === GRBL || type === GRBLHAL) {
                 this.setState(state => ({
                     controller: {
                         ...state.controller,
@@ -142,7 +142,7 @@ class GrblWidget extends PureComponent {
             }
         },
         'controller:state': (type, controllerState) => {
-            if (type === GRBL) {
+            if (type === GRBL || type === GRBLHAL) {
                 this.setState(state => ({
                     controller: {
                         ...state.controller,
@@ -178,7 +178,7 @@ class GrblWidget extends PureComponent {
         return {
             minimized: this.config.get('minimized', false),
             isFullscreen: false,
-            isReady: (controller.loadedControllers.length === 1) || (controller.type === GRBL),
+            isReady: (controller.loadedControllers.length === 1) || (controller.type === GRBL) || (controller.type === GRBLHAL),
             canClick: true, // Defaults to true
             port: controller.port,
             controller: {
@@ -225,7 +225,7 @@ class GrblWidget extends PureComponent {
         if (!port) {
             return false;
         }
-        if (type !== GRBL) {
+        if (type !== GRBL && type !== GRBLHAL) {
             return false;
         }
 

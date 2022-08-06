@@ -193,6 +193,9 @@ class SecondaryWidgets extends Component {
                 if (name === 'grbl' && !includes(controller.loadedControllers, GRBL)) {
                     return false;
                 }
+                if (name === 'grblHal' && !includes(controller.loadedControllers, GRBLHAL)) {
+                    return false;
+                }
                 if (name === 'marlin' && !includes(controller.loadedControllers, MARLIN)) {
                     return false;
                 }

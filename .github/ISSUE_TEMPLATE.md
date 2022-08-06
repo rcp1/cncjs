@@ -16,6 +16,7 @@ Describe the issue or feature request in detail. Take a screenshot or record a v
 #### CNC Controller
 
 - [x] Grbl
+- [ ] GrblHal
 - [ ] Smoothieware
 - [ ] TinyG/g2core
 

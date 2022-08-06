@@ -3,7 +3,7 @@ import includes from 'lodash/includes';
 import union from 'lodash/union';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { GRBL, MARLIN, SMOOTHIE, TINYG } from 'app/constants';
+import { GRBL, GRBLHAL, MARLIN, SMOOTHIE, TINYG } from 'app/constants';
 import controller from 'app/lib/controller';
 import store from 'app/store';
 import defaultState from 'app/store/defaultState';
@@ -19,6 +19,9 @@ export const getActiveWidgets = () => {
     const activeWidgets = union(defaultWidgets, primaryWidgets, secondaryWidgets)
         .filter(widget => {
             if (widget === 'grbl' && !includes(controller.loadedControllers, GRBL)) {
+                return false;
+            }
+            if (widget === 'grblHal' && !includes(controller.loadedControllers, GRBLHAL)) {
                 return false;
             }
             if (widget === 'marlin' && !includes(controller.loadedControllers, MARLIN)) {
@@ -47,6 +50,9 @@ export const getInactiveWidgets = () => {
     const inactiveWidgets = difference(allWidgets, defaultWidgets, primaryWidgets, secondaryWidgets)
         .filter(widget => {
             if (widget === 'grbl' && !includes(controller.loadedControllers, GRBL)) {
+                return false;
+            }
+            if (widget === 'grblHal' && !includes(controller.loadedControllers, GRBLHAL)) {
                 return false;
             }
             if (widget === 'marlin' && !includes(controller.loadedControllers, MARLIN)) {

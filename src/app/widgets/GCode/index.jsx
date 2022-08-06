@@ -12,6 +12,7 @@ import WidgetConfig from '../WidgetConfig';
 import GCode from './GCode';
 import {
     GRBL,
+    GRBLHAL,
     MARLIN,
     SMOOTHIE,
     TINYG,
@@ -100,8 +101,8 @@ class GCodeWidget extends PureComponent {
             });
         },
         'controller:state': (type, state) => {
-            // Grbl
-            if (type === GRBL) {
+            // Grbl or GrblHal
+            if (type === GRBL || type === GRBLHAL) {
                 const { parserstate } = { ...state };
                 const { modal = {} } = { ...parserstate };
                 const units = {

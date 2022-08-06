@@ -21,6 +21,17 @@ import {
     GRBL_ACTIVE_STATE_SLEEP,
     GRBL_ACTIVE_STATE_ALARM,
     GRBL_ACTIVE_STATE_CHECK,
+    // GrblHal
+    GRBLHAL,
+    GRBLHAL_ACTIVE_STATE_IDLE,
+    GRBLHAL_ACTIVE_STATE_RUN,
+    GRBLHAL_ACTIVE_STATE_HOLD,
+    GRBLHAL_ACTIVE_STATE_DOOR,
+    GRBLHAL_ACTIVE_STATE_HOME,
+    GRBLHAL_ACTIVE_STATE_SLEEP,
+    GRBLHAL_ACTIVE_STATE_ALARM,
+    GRBLHAL_ACTIVE_STATE_CHECK,
+    GRBLHAL_ACTIVE_STATE_TOOL,
     // Marlin
     MARLIN,
     // Smoothie
@@ -120,6 +131,34 @@ class PrimaryToolbar extends PureComponent {
             }[activeState];
         }
 
+        if (controllerType === GRBLHAL) {
+            const activeState = _.get(controllerState, 'status.activeState');
+
+            stateStyle = {
+                [GRBLHAL_ACTIVE_STATE_IDLE]: 'controller-state-default',
+                [GRBLHAL_ACTIVE_STATE_RUN]: 'controller-state-primary',
+                [GRBLHAL_ACTIVE_STATE_HOLD]: 'controller-state-warning',
+                [GRBLHAL_ACTIVE_STATE_DOOR]: 'controller-state-warning',
+                [GRBLHAL_ACTIVE_STATE_HOME]: 'controller-state-primary',
+                [GRBLHAL_ACTIVE_STATE_SLEEP]: 'controller-state-success',
+                [GRBLHAL_ACTIVE_STATE_ALARM]: 'controller-state-danger',
+                [GRBLHAL_ACTIVE_STATE_CHECK]: 'controller-state-info',
+                [GRBLHAL_ACTIVE_STATE_TOOL]: 'controller-state-primary'
+            }[activeState];
+
+            stateText = {
+                [GRBLHAL_ACTIVE_STATE_IDLE]: i18n.t('controller:GrblHal.activeState.idle'),
+                [GRBLHAL_ACTIVE_STATE_RUN]: i18n.t('controller:GrblHal.activeState.run'),
+                [GRBLHAL_ACTIVE_STATE_HOLD]: i18n.t('controller:GrblHal.activeState.hold'),
+                [GRBLHAL_ACTIVE_STATE_DOOR]: i18n.t('controller:GrblHal.activeState.door'),
+                [GRBLHAL_ACTIVE_STATE_HOME]: i18n.t('controller:GrblHal.activeState.home'),
+                [GRBLHAL_ACTIVE_STATE_SLEEP]: i18n.t('controller:GrblHal.activeState.sleep'),
+                [GRBLHAL_ACTIVE_STATE_ALARM]: i18n.t('controller:GrblHal.activeState.alarm'),
+                [GRBLHAL_ACTIVE_STATE_CHECK]: i18n.t('controller:GrblHal.activeState.check'),
+                [GRBLHAL_ACTIVE_STATE_TOOL]: i18n.t('controller:GrblHal.activeState.tool') // TODO(rcp1): Add english text for identifier
+            }[activeState];
+        }
+
         if (controllerType === MARLIN) {
             // Marlin does not have machine state
         }
@@ -205,7 +244,7 @@ class PrimaryToolbar extends PureComponent {
         const controllerState = state.controller.state;
         const defaultWCS = 'G54';
 
-        if (controllerType === GRBL) {
+        if (controllerType === GRBL || controllerType === GRBLHAL) {
             return _.get(controllerState, 'parserstate.modal.wcs') || defaultWCS;
         }
 

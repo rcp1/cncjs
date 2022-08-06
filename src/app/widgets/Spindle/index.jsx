@@ -14,6 +14,10 @@ import {
     GRBL,
     GRBL_ACTIVE_STATE_IDLE,
     GRBL_ACTIVE_STATE_HOLD,
+    // GrblHal
+    GRBLHAL,
+    GRBLHAL_ACTIVE_STATE_IDLE,
+    GRBLHAL_ACTIVE_STATE_HOLD,
     // Marlin
     MARLIN,
     // Smoothie

@@ -12,6 +12,9 @@ import {
     // Grbl
     GRBL,
     GRBL_ACTIVE_STATE_ALARM,
+    // GrblHal
+    GRBLHAL,
+    GRBLHAL_ACTIVE_STATE_ALARM,
     // Marlin
     MARLIN,
     // Smoothie
@@ -99,6 +102,15 @@ class WorkflowControl extends PureComponent {
             const activeState = get(controllerState, 'status.activeState');
             const states = [
                 GRBL_ACTIVE_STATE_ALARM
+            ];
+            if (includes(states, activeState)) {
+                return false;
+            }
+        }
+        if (controllerType === GRBLHAL) {
+            const activeState = get(controllerState, 'status.activeState');
+            const states = [
+                GRBLHAL_ACTIVE_STATE_ALARM
             ];
             if (includes(states, activeState)) {
                 return false;

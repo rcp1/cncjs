@@ -33,7 +33,7 @@ const settings = {
 
         // string or array of namespaces
         ns: [
-            'controller', // Grbl|Smoothie|TinyG
+            'controller', // Grbl|GrblHal|Smoothie|TinyG
             'gcode', // G-code
             'resource' // default
         ],

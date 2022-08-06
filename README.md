@@ -14,6 +14,7 @@ For a more complete introduction, see the [Introduction](https://github.com/cncj
 * Supported controllers
     - [Grbl](https://github.com/gnea/grbl) ([Download](https://github.com/gnea/grbl/releases))
     - [Grbl-Mega](https://github.com/gnea/grbl-Mega) ([Download](https://github.com/gnea/grbl-Mega/releases))
+    - [GrblHal](https://github.com/grblHAL)
     - [Marlin](https://github.com/MarlinFirmware/Marlin) ([Download](http://marlinfw.org/meta/download/))
     - [Smoothieware](https://github.com/Smoothieware/Smoothieware) ([Download](https://github.com/Smoothieware/Smoothieware/tree/edge/FirmwareBin))
     - [TinyG](https://github.com/synthetos/TinyG) (_Recommend: firmware version 0.97 build 449.xx_) ([Download](http://synthetos.github.io/))

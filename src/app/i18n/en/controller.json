@@ -29,6 +29,19 @@
             "check": "Check"
         }
     },
+    "GrblHal": {
+        "activeState": {
+            "idle": "",
+            "run": "",
+            "hold": "",
+            "door": "",
+            "home": "",
+            "sleep": "",
+            "alarm": "",
+            "check": "",
+            "tool": ""
+        }
+    },
     "Smoothie": {
         "activeState": {
             "idle": "Idle",

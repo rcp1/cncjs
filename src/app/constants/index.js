@@ -65,6 +65,7 @@ export const METRIC_STEPS = [
 
 // Controller
 export const GRBL = 'Grbl';
+export const GRBLHAL = 'GrblHal';
 export const MARLIN = 'Marlin';
 export const SMOOTHIE = 'Smoothie';
 export const TINYG = 'TinyG';
@@ -83,6 +84,17 @@ export const GRBL_ACTIVE_STATE_HOME = 'Home';
 export const GRBL_ACTIVE_STATE_SLEEP = 'Sleep';
 export const GRBL_ACTIVE_STATE_ALARM = 'Alarm';
 export const GRBL_ACTIVE_STATE_CHECK = 'Check';
+
+// GrblHal Active State
+export const GRBLHAL_ACTIVE_STATE_IDLE = 'Idle';
+export const GRBLHAL_ACTIVE_STATE_RUN = 'Run';
+export const GRBLHAL_ACTIVE_STATE_HOLD = 'Hold';
+export const GRBLHAL_ACTIVE_STATE_DOOR = 'Door';
+export const GRBLHAL_ACTIVE_STATE_HOME = 'Home';
+export const GRBLHAL_ACTIVE_STATE_SLEEP = 'Sleep';
+export const GRBLHAL_ACTIVE_STATE_ALARM = 'Alarm';
+export const GRBLHAL_ACTIVE_STATE_CHECK = 'Check';
+export const GRBLHAL_ACTIVE_STATE_TOOL = 'Tool';
 
 // Smoothie Active State
 export const SMOOTHIE_ACTIVE_STATE_IDLE = 'Idle';

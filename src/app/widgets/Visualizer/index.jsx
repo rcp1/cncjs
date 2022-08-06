@@ -35,6 +35,9 @@ import {
     // Grbl
     GRBL,
     GRBL_ACTIVE_STATE_RUN,
+    // GrblHal
+    GRBLHAL,
+    GRBLHAL_ACTIVE_STATE_RUN,
     // Marlin
     MARLIN,
     // Smoothie
@@ -687,8 +690,8 @@ class VisualizerWidget extends PureComponent {
             }));
         },
         'controller:state': (type, controllerState) => {
-            // Grbl
-            if (type === GRBL) {
+            // Grbl or GrblHal
+            if (type === GRBL || type === GRBLHAL) {
                 const { status, parserstate } = { ...controllerState };
                 const { mpos, wpos } = status;
                 const { modal = {} } = { ...parserstate };
@@ -981,12 +984,18 @@ class VisualizerWidget extends PureComponent {
         if (!objects.cuttingTool.visible) {
             return false;
         }
-        if (!includes([GRBL, MARLIN, SMOOTHIE, TINYG], controllerType)) {
+        if (!includes([GRBL, GRBLHAL, MARLIN, SMOOTHIE, TINYG], controllerType)) {
             return false;
         }
         if (controllerType === GRBL) {
             const activeState = get(controllerState, 'status.activeState');
             if (activeState !== GRBL_ACTIVE_STATE_RUN) {
+                return false;
+            }
+        }
+        if (controllerType === GRBLHAL) {
+            const activeState = get(controllerState, 'status.activeState');
+            if (activeState !== GRBLHAL_ACTIVE_STATE_RUN) {
                 return false;
             }
         }

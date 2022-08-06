@@ -19,6 +19,11 @@ import {
     GRBL,
     GRBL_ACTIVE_STATE_IDLE,
     GRBL_ACTIVE_STATE_RUN,
+    // GrblHal
+    GRBLHAL,
+    GRBLHAL_ACTIVE_STATE_IDLE,
+    GRBLHAL_ACTIVE_STATE_RUN,
+    GRBLHAL_ACTIVE_STATE_TOOL,
     // Marlin
     MARLIN,
     // Smoothie
@@ -293,6 +298,17 @@ class MacroWidget extends PureComponent {
             const states = [
                 GRBL_ACTIVE_STATE_IDLE,
                 GRBL_ACTIVE_STATE_RUN
+            ];
+            if (!includes(states, activeState)) {
+                return false;
+            }
+        }
+        if (controllerType === GRBLHAL) {
+            const activeState = get(controllerState, 'status.activeState');
+            const states = [
+                GRBLHAL_ACTIVE_STATE_IDLE,
+                GRBLHAL_ACTIVE_STATE_RUN,
+                GRBLHAL_ACTIVE_STATE_TOOL,
             ];
             if (!includes(states, activeState)) {
                 return false;

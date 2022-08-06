@@ -11,11 +11,13 @@ import config from '../configstore';
 import taskRunner from '../taskrunner';
 import {
     GrblController,
+    GrblHalController,
     MarlinController,
     SmoothieController,
     TinyGController
 } from '../../controllers';
 import { GRBL } from '../../controllers/Grbl/constants';
+import { GRBLHAL } from '../../controllers/GrblHal/constants';
 import { MARLIN } from '../../controllers/Marlin/constants';
 import { SMOOTHIE } from '../../controllers/Smoothie/constants';
 import { G2CORE, TINYG } from '../../controllers/TinyG/constants';
@@ -39,6 +41,8 @@ const caseInsensitiveEquals = (str1, str2) => {
 const isValidController = (controller) => (
     // Grbl
     caseInsensitiveEquals(GRBL, controller) ||
+    // GrblHal
+    caseInsensitiveEquals(GRBLHAL, controller) ||
     // Marlin
     caseInsensitiveEquals(MARLIN, controller) ||
     // Smoothie
@@ -100,6 +104,10 @@ class CNCEngine {
         // Grbl
         if (!controller || caseInsensitiveEquals(GRBL, controller)) {
             this.controllerClass[GRBL] = GrblController;
+        }
+        // GrblHal
+        if (!controller || caseInsensitiveEquals(GRBLHAL, controller)) {
+            this.controllerClass[GRBLHAL] = GrblHalController;
         }
         // Marlin
         if (!controller || caseInsensitiveEquals(MARLIN, controller)) {
